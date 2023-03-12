@@ -35,3 +35,6 @@ extern "C" MATHLIBRARY_API unsigned fibonacci_index();
 
 // Return Fibonacci Sequence in array up to n
 extern "C" MATHLIBRARY_API bool fibonacci_sequence(int n, unsigned long long target[]);
+
+// Return elementwise sum of arrayA and arrayB in arrayC, all being arrays of equal sizes.
+extern "C" MATHLIBRARY_API bool add_arrs(int n, double arrayA[], double arrayB[], double arrayC[]);

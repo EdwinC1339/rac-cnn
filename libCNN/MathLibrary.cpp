@@ -67,3 +67,11 @@ bool fibonacci_sequence(int n, unsigned long long target[])
     }
     return fibonacci_index() == n;
 }
+
+MATHLIBRARY_API bool add_arrs(int n, double arrayA[], double arrayB[], double arrayC[])
+{
+    for (int i = 0; i < n; i++) {
+        arrayC[i] = arrayA[i] + arrayB[i];
+    }
+    return true;
+}
