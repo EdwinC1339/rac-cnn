@@ -4,17 +4,10 @@
  
 (define-ffi-definer define-cnn (ffi-lib ".\\libCNN\\x64\\Debug\\libCNN"))
 
-(define-cnn fibonacci_init (_fun _int _int -> _void))
-(define-cnn fibonacci_next (_fun -> _bool))
-(define-cnn fibonacci_current (_fun -> _int))
+(define-cnn fibonacci_sequence (_fun 
+    [n : _int] 
+    [seq : (_vector o _llong n)] 
+    -> [res : _bool]
+    -> (values seq res)))
 
-(define (init) (fibonacci_init 1 1))
-(define (next) (fibonacci_next))
-(define (current) (fibonacci_current))
-
-(void (init))
-
-(define (fib n) (cond
-    ((= n 0) (list (current)))
-    (else (cons (car (cons (current) (next))) (fib (- n 1))))
-))
+(fibonacci_sequence 10) 

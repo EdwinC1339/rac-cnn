@@ -54,3 +54,16 @@ unsigned fibonacci_index()
 {
     return index_;
 }
+
+// Store Fibonacci Sequence in array sequence up to n
+bool fibonacci_sequence(int n, unsigned long long target[])
+{
+    target[0] = 1;
+    target[1] = 1;
+    fibonacci_init(1, 1);
+    while (fibonacci_index() < n && fibonacci_next())
+    {
+        target[fibonacci_index()] = fibonacci_current();
+    }
+    return fibonacci_index() == n;
+}
