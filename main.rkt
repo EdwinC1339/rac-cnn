@@ -2,23 +2,24 @@
 (require ffi/unsafe
          ffi/unsafe/define)
  
+(ffi-lib ".\\libCNN\\fftw-3.3.5-dll64\\libfftw3-3")
 (define-ffi-definer define-cnn (ffi-lib ".\\libCNN\\x64\\Debug\\libCNN"))
 
-(define-cnn fibonacci_sequence (_fun 
-    [n : _int] 
-    [seq : (_vector o _llong n)] 
-    -> [res : _bool]
-    -> (values seq res)))
+(define (ensure-inexact n) (if (inexact? n) n (exact->inexact n)))
 
-(fibonacci_sequence 10) 
+(define (number->complex-double n) (list (ensure-inexact (real-part n)) (ensure-inexact (imag-part n))))
+(define (complex-double->number l) (+ (car l) (* (cadr l) 0+i)))
 
-(define-cnn add_arrs (_fun
-    [n : _int]
-    [a : (_list i _double)]
-    (_list i _double)
-    [sum : (_list o _double n)]
-    -> [res : _bool]
-    -> (values sum res a)
+(define complex-double (make-ctype 
+    (_list-struct _double _double)
+    number->complex-double
+    complex-double->number   
 ))
 
-(add_arrs 3 '(1.0 2.0 3.0) '(3.0 1.0 1.0))
+(define-cnn fft (_fun 
+    (n : _int) 
+    (_vector i complex-double) 
+    (o : (_vector o complex-double n)) 
+    -> _bool 
+    -> o))
+

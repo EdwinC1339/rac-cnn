@@ -1,2 +1,3 @@
 libCNN/x64/*
 libCNN/.vs/*
+libCNN/fftw-3.3.5-dll64/*

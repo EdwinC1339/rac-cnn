@@ -1,5 +1,6 @@
 // MathLibrary.h - Contains declarations of math functions
 #pragma once
+#include <complex>
 
 #ifdef MATHLIBRARY_EXPORTS
 #define MATHLIBRARY_API __declspec(dllimport)
@@ -38,3 +39,10 @@ extern "C" MATHLIBRARY_API bool fibonacci_sequence(int n, unsigned long long tar
 
 // Return elementwise sum of arrayA and arrayB in arrayC, all being arrays of equal sizes.
 extern "C" MATHLIBRARY_API bool add_arrs(int n, double arrayA[], double arrayB[], double arrayC[]);
+
+extern "C" MATHLIBRARY_API bool fft(int n, std::complex<double> in[], std::complex<double> out[]);
+
+// Convolve a * b in o
+extern "C" MATHLIBRARY_API bool convolve(double a[], double b[], double o[], size_t n);
+// Convolve a * b in o using plan
+extern "C" MATHLIBRARY_API bool convolve(double a[], double b[], double o[], size_t n, fftw_plan plan);

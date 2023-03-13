@@ -36,4 +36,20 @@
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="fftw-3.3.5-dll64\libfftw3-3.def">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="fftw-3.3.5-dll64\libfftw3f-3.def">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="fftw-3.3.5-dll64\libfftw3l-3.def">
+      <Filter>Source Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="fftw-3.3.5-dll64\libfftw3-3.lib" />
+    <Library Include="fftw-3.3.5-dll64\libfftw3f-3.lib" />
+    <Library Include="fftw-3.3.5-dll64\libfftw3l-3.lib" />
+  </ItemGroup>
 </Project>

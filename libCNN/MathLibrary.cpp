@@ -3,6 +3,7 @@
 #include <utility>
 #include <limits.h>
 #include "MathLibrary.h"
+#include <fftw3.h>
 
 // DLL internal state variables:
 static unsigned long long previous_;  // Previous value, if any
@@ -73,5 +74,31 @@ MATHLIBRARY_API bool add_arrs(int n, double arrayA[], double arrayB[], double ar
     for (int i = 0; i < n; i++) {
         arrayC[i] = arrayA[i] + arrayB[i];
     }
+    return true;
+}
+
+MATHLIBRARY_API bool fft(int n, std::complex<double> in[], std::complex<double> out[])
+{
+    fftw_plan p;
+
+    auto in_space = new fftw_complex[n];
+    p = fftw_plan_dft_1d(n, in_space, reinterpret_cast<fftw_complex*>(out), FFTW_FORWARD, FFTW_ESTIMATE);
+    memcpy(in_space, in, n * sizeof(fftw_complex));
+    fftw_execute(p);
+    delete[] in_space;
+    
+    return true;
+}
+
+MATHLIBRARY_API bool convolve(double a[], double b[], double o[], size_t n)
+{
+    auto in_space = new double[n];
+
+    delete[] in_space;
+    return true;
+}
+
+MATHLIBRARY_API bool convolve(double a[], double b[], double o[], size_t n, fftw_plan plan)
+{
     return true;
 }
